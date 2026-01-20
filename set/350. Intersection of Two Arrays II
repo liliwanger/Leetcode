@@ -1,0 +1,16 @@
+class Solution:
+    def intersect(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        temp = {}
+
+        res = []
+        for num in nums1:
+            temp[num] = temp.get(num, 0) +1
+
+        for num in nums2:
+            if temp.get(num, 0) >0:
+                res.append(num)
+                temp[num] -=1
+        return res
+            
+
+     
