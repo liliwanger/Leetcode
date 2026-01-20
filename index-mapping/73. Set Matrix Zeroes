@@ -1,0 +1,52 @@
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+#         用第一行 & 第一列作为 O(1) 空间的标记数组，
+# 先记录、再传播、最后修正边界。
+        #m row, n col
+        m,n = len(matrix), len(matrix[0])
+        #记录第一行是否原本有0
+        first_row_zero = any(matrix[0][j] == 0 for j in range(n))
+        #记录第一列是否有0
+        first_col_zero = any(matrix[i][0] == 0 for i in range(m))
+
+        # use first row/col as makers
+#         从 (1,1) 开始（刻意跳过第一行和第一列）
+
+# 一旦发现 matrix[i][j] == 0：
+
+# 把该行的“行头”设为 0 → matrix[i][0]
+
+# 把该列的“列头”设为 0 → matrix[0][j]
+        for i in range(1,m):
+            for j in range(1,n):
+                if matrix[i][j] == 0:
+                    matrix[i][0] = 0
+                    matrix[0][j] = 0
+        #set cells based on markers
+#         再次遍历内部区域
+
+# 如果：
+
+# 行标记为 0，或
+
+# 列标记为 0
+
+# 那当前位置就设为 0
+        for i in range(1, m):
+            for j in range(1,n):
+                if matrix[i][0] == 0 or matrix[0][j]==0:
+                    matrix[i][j] = 0
+#如果第一行原本有 0，清空第一行
+#如果第一列原本有 0，清空第一列
+
+        if first_row_zero:
+            for j in range(n):
+                matrix[0][j] = 0
+        if first_col_zero:
+            for i in range(m):
+                matrix[i][0] = 0
+
+        
