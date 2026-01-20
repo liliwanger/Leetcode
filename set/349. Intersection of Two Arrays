@@ -1,0 +1,16 @@
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        temp1 = set(nums1)
+        temp2 = set(nums2)
+        res = []
+        for item in temp1:
+            if item in temp2:
+                res.append(item)
+        return res
+
+
+
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        # 直接将数组转为集合，并使用 & 符号求交集
+        return list(set(nums1) & set(nums2))        
