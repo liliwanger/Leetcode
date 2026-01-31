@@ -1,0 +1,21 @@
+class Solution:
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        left = 0
+        total = 0
+        min_len = float("inf")  # 初始化为无穷大
+        
+        for right, num in enumerate(nums):
+            # 1️⃣ 扩大窗口：加入右边界元素
+            total += num
+            
+            # 2️⃣ 收缩窗口：当和 >= target 时，尝试缩小左边界
+            while total >= target:
+                # 更新最小长度
+                min_len = min(min_len, right - left + 1)
+                
+                # 移除左边界元素
+                total -= nums[left]
+                left += 1
+        
+        # 3️⃣ 返回结果（无解时返回 0）
+        return 0 if min_len == float("inf") else min_len
